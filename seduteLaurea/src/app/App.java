@@ -22,9 +22,7 @@ public class App {
             conn = DatabaseConnection.getConnection();
         } catch (DataAccessException e) {
             JOptionPane.showMessageDialog(null, e.getMessage()
-                            + "\n\nAvvia il database con \"docker compose up -d db\" oppure configura"
-                            + "\nDB_URL / DB_USER / DB_PASSWORD (vedi README).",
-                    "Sedute di Laurea - database non raggiungibile", JOptionPane.ERROR_MESSAGE);
+            );
             System.exit(1);
             return;
         }
