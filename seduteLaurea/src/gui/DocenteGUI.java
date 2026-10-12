@@ -41,8 +41,13 @@ public class DocenteGUI extends AreaRiservataFrame {
         super(titolo, user, controllers, onLogout);
 
         this.docente = controllers.docenti().getDocenteByIdUser(user.getIdUser());
+
+        System.out.println("ID USER = " + user.getIdUser());
+        System.out.println("DOCENTE TROVATO = " + this.docente);
+
         if (docente == null) {
             dispose();
+            return;
         }
         impostaIntestazione("Prof. " + docente.getNomeCompleto(), titolo + " - " + docente.getEmail());
 

@@ -41,7 +41,22 @@ public class DocentePostgresDAO implements DocenteDAO {
 
     @Override
     public Docente getDocenteByIdUser(String idUser) {
-        return trovaUno("SELECT * FROM docenti WHERE id_user = ?", idUser);
+        System.out.println("ID USER RICEVUTO: [" + idUser + "]");
+        String query = "SELECT * FROM public.docenti WHERE id_user = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, idUser);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return mappa(rs);
+                }
+                System.out.println("Nessun DOCENTE TROVATO PER id_user = " + idUser);
+                return null;
+            }
+        } catch (SQLException e) {
+            throw DataAccessException.da(e);
+        }
     }
 
     @Override
